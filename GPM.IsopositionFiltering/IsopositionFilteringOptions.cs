@@ -1,75 +1,50 @@
 ﻿using Prism.Mvvm;
 
-namespace GPM.CustomAnalysis.IsopositionFiltering
+namespace GPM.CustomAnalysis.IsopositionFiltering;
+
+public class IsopositionFilteringOptions : BindableBase
 {
-    public class IsopositionFilteringOptions : BindableBase
-    {
-        private const string DefaultElementOfInterest = "AM";
-        private const double DefaultGridSize = 1d;
-        private const double DefaultGridDelocalization = 0.5d;
-        private const double DefaultXThreshold = 1d;
-        private const double DefaultXStep = 0.1d;
-        private const int DefaultDispStep = 20;
+	private string name_Int = "AM";
+	private double grid_size_init = 1.0;
+	private double grid_delo = 0.5;
+	private double x_threshold = 1.0;  // Concentration threshold : Min
+	private double x_step = 0.1;  // Concentration distribution visualization : bin size
+	private int disp_step = 20;  // Number of Iteration for the progress "bar"
 
 
-        private string elementOfInterest = DefaultElementOfInterest;
-        /// <summary>
-        /// Name of the element of interest
-        /// </summary>
-        public string ElementOfInterest
-        {
-            get => elementOfInterest;
-            set => SetProperty(ref elementOfInterest, value);
-        }
+	public string Name_Int
+	{
+		get => name_Int;
+		set => SetProperty(ref name_Int, value);
+	}
 
-        private double _gridSize = DefaultGridSize;
-        /// <summary>
-        /// Grid size in nm
-        /// </summary>
-        public double GridSize
-        {
-            get => _gridSize;
-            set => SetProperty(ref _gridSize, value);
-        }
+	public double Grid_size_init
+	{
+		get => grid_size_init;
+		set => SetProperty(ref grid_size_init, value);
+	}
 
-        private double gridDelocalization = DefaultGridDelocalization;
-        /// <summary>
-        /// Delocalization in nm
-        /// </summary>
-        public double GridDelocalization
-        {
-            get => gridDelocalization;
-            set => SetProperty(ref gridDelocalization, value);
-        }
+	public double Grid_delo
+	{
+		get => grid_delo;
+		set => SetProperty(ref grid_delo, value);
+	}
 
-        private double xThreshold = DefaultXThreshold;
-        /// <summary>
-        /// Concentration threshold : Min
-        /// </summary>
-        public double XThreshold
-        {
-            get => xThreshold;
-            set => SetProperty(ref xThreshold, value);
-        }
+	public double X_threshold
+	{
+		get => x_threshold;
+		set => SetProperty(ref x_threshold, value);
+	}
 
-        private double xStep = DefaultXStep;
-        /// <summary>
-        /// Concentration distribution visualization : bin size
-        /// </summary>
-        public double XStep
-        {
-            get => xStep;
-            set => SetProperty(ref xStep, value);
-        }
+	public double X_step
+	{
+		get => x_step;
+		set => SetProperty(ref x_step, value);
+	}
 
-        private int dispStep = DefaultDispStep;
-        /// <summary>
-        /// Number of Iteration for the progress "bar"
-        /// </summary>
-        public int DispStep
-        {
-            get => dispStep;
-            set => SetProperty(ref dispStep, value);
-        }
+	public int Disp_step
+	{
+		get => disp_step;
+		set => SetProperty(ref disp_step, value);
 	}
 }

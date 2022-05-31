@@ -1,24 +1,27 @@
 ﻿using System;
-using Cameca.CustomAnalysis.Interface.CustomAnalysis;
+using Cameca.CustomAnalysis.Interface;
+using Cameca.CustomAnalysis.Utilities;
 using Prism.Ioc;
 using Prism.Modularity;
 
-namespace GPM.CustomAnalysis.IsopositionFiltering
+namespace GPM.CustomAnalysis.IsopositionFiltering;
+
+public class IsopositionFilteringModule : IModule
 {
-    [ModuleDependency("IvasModule")]
-    public class IsopositionFilteringModule : IModule
+    public void RegisterTypes(IContainerRegistry containerRegistry)
     {
-        public void RegisterTypes(IContainerRegistry containerRegistry)
-        {
-            // Register any additional dependencies with the Unity IoC container
-        }
+        containerRegistry.RegisterCoreServices();
 
-        public void OnInitialized(IContainerProvider containerProvider)
-        {
-            var customAnalysisService = containerProvider.Resolve<ICustomAnalysisService>();
+        containerRegistry.Register<object, IsopositionFilteringNode>(IsopositionFilteringNode.UniqueId);
+        containerRegistry.RegisterInstance<INodeDisplayInfo>(IsopositionFilteringNode.DisplayInfo, IsopositionFilteringNode.UniqueId);
+        containerRegistry.Register<IAnalysisMenuFactory, IsopositionFilteringNodeMenuFactory>(IsopositionFilteringNodeMenuFactory.UniqueId);
+        containerRegistry.Register<object, IsopositionFilteringViewModel>(IsopositionFilteringViewModel.UniqueId);
+    }
 
-            customAnalysisService.Register<IsopositionFilteringCustomAnalysis, IsopositionFilteringOptions>(
-                new CustomAnalysisDescription("GPM_IsopostionFiltering", "GPM Isoposition Filtering", new Version()));
-        }
+    public void OnInitialized(IContainerProvider containerProvider)
+    {
+        var extensionRegistry = containerProvider.Resolve<IExtensionRegistry>();
+
+        extensionRegistry.RegisterAnalysisView<IsopositionFilteringView, IsopositionFilteringViewModel>(AnalysisViewLocation.Top);
     }
 }
