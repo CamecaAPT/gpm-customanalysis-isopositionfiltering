@@ -47,22 +47,21 @@ internal class IsopositionFilteringNode : AnalysisNodeBase
 		return Encoding.UTF8.GetBytes(stringWriter.ToString());
 	}
 
-	protected override void OnLoaded(NodeLoadedEventArgs eventArgs)
+	protected override void OnCreated(NodeCreatedEventArgs eventArgs)
 	{
-		if (eventArgs.Data is not { } data) return;
-		var xmlData = Encoding.UTF8.GetString(data);
-		var serializer = new XmlSerializer(typeof(IsopositionFilteringOptions));
-		using var stringReader = new StringReader(xmlData);
-		if (serializer.Deserialize(stringReader) is IsopositionFilteringOptions loadedOptions)
-		{
-			Options = loadedOptions;
-		}
-	}
+        base.OnCreated(eventArgs);
+        Options.PropertyChanged += OptionsOnPropertyChanged;
 
-	protected override void OnInstantiated(INodeInstantiatedEventArgs eventArgs)
-	{
-		base.OnInstantiated(eventArgs);
-		Options.PropertyChanged += OptionsOnPropertyChanged;
+		if (eventArgs.Trigger == EventTrigger.Load && eventArgs.Data is { } data)
+        {
+            var xmlData = Encoding.UTF8.GetString(data);
+            var serializer = new XmlSerializer(typeof(IsopositionFilteringOptions));
+            using var stringReader = new StringReader(xmlData);
+            if (serializer.Deserialize(stringReader) is IsopositionFilteringOptions loadedOptions)
+            {
+                Options = loadedOptions;
+            }
+        }
 	}
 
 	private void OptionsOnPropertyChanged(object? sender, PropertyChangedEventArgs e)

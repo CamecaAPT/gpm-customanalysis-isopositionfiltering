@@ -10,7 +10,7 @@ public class IsopositionFilteringModule : IModule
 {
     public void RegisterTypes(IContainerRegistry containerRegistry)
     {
-        containerRegistry.RegisterCoreServices();
+        containerRegistry.AddCustomAnalysisUtilities();
 
         containerRegistry.Register<object, IsopositionFilteringNode>(IsopositionFilteringNode.UniqueId);
         containerRegistry.RegisterInstance<INodeDisplayInfo>(IsopositionFilteringNode.DisplayInfo, IsopositionFilteringNode.UniqueId);

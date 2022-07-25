@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Cameca.CustomAnalysis.Interface;
-using Cameca.CustomAnalysis.Interface.Resources.IonData;
 using Cameca.CustomAnalysis.Utilities;
 using Microsoft.Win32.SafeHandles;
 
