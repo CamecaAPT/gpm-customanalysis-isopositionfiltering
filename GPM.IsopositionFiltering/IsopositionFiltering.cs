@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
 using Cameca.CustomAnalysis.Interface;
-using Cameca.CustomAnalysis.Interface.Resources.IonData;
 using Cameca.CustomAnalysis.Utilities;
 using Microsoft.Win32.SafeHandles;
 
@@ -54,8 +53,8 @@ internal class IsopositionFiltering
 
 		// Open Console
 		// ---------------
-		ConsoleHelper.AllocConsole();
-		vPrepareConsole();
+		//ConsoleHelper.AllocConsole();
+		//vPrepareConsole();
 		Console.WriteLine("		");
 		Console.WriteLine("			CLUSTER IDENTIFICATION : Isoposition filtering	");
 		Console.WriteLine("		");
@@ -464,7 +463,7 @@ internal class IsopositionFiltering
 		// Close Console
 		// ----------------
 		//MessageBox.Show("Computation done !! Press OK to close!");  
-		ConsoleHelper.FreeConsole();
+		//ConsoleHelper.FreeConsole();
 
 		// Display the concentration distribution in IVAS
 		// --------------------------------------------------
